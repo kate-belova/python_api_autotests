@@ -1,0 +1,1 @@
+[{"uid":"2157f5336f662bf3","name":"Get user auth tokens success","time":{"start":1783184859256,"stop":1783184859602,"duration":346},"status":"passed","severity":"normal"},{"uid":"d36bc262cf8dcf27","name":"Get unexisting user auth tokens failure","time":{"start":1783184857883,"stop":1783184858338,"duration":455},"status":"passed","severity":"normal"}]
