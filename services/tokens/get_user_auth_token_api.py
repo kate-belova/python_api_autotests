@@ -25,14 +25,13 @@ class GetUserAuthTokenAPI(TokensAPI):
         )
         self.STATUS_CODE = response.status_code
 
-        content_type = response.headers.get("content-type", "")
-        if "application/json" not in content_type:
-            raise ValueError(
-                f"Expected application/json content type, but got {content_type!r}"
-            )
         if self.STATUS_CODE == 401:
             self.ERROR_MESSAGE = self.UNAUTHORIZED_ERROR_MESSAGE
-            self.RESPONSE_DATA = ErrorMessageResponseSchema(**response.json())
+            self.SCHEMA = ErrorMessageResponseSchema
         else:
-            self.RESPONSE_DATA = GetUserAuthTokenResponseSchema(**response.json())
+            self.SCHEMA = GetUserAuthTokenResponseSchema
+
+        self.get_response_data(response)
+
+        if isinstance(self.RESPONSE_DATA, GetUserAuthTokenResponseSchema):
             self.ACCESS_TOKEN = self.RESPONSE_DATA.access_token
